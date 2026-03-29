@@ -1,0 +1,8 @@
+User prompt:
+{{user_prompt}}
+
+Candidate intents:
+{{candidate_intents_json}}
+
+Choose only one candidate intent and return strict JSON.
+Do not add any unknown fields.

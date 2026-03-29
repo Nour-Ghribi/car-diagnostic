@@ -1,0 +1,27 @@
+{
+  "data": {
+    "signals": {},
+    "dtc": null,
+    "mode06": {
+      "supported": true
+    },
+    "vehicle_context": null,
+    "capabilities": {
+      "supported_signals": [
+        "rpm",
+        "engine_load",
+        "coolant_temp",
+        "throttle_pos",
+        "stft_b1",
+        "ltft_b1",
+        "o2_b1s1",
+        "vehicle_speed",
+        "module_voltage"
+      ],
+      "mode06_supported": true
+    },
+    "metrics": null
+  },
+  "missing_data": [],
+  "error_message": null
+}

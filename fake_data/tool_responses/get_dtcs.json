@@ -1,0 +1,20 @@
+{
+  "data": {
+    "signals": {},
+    "dtc": {
+      "stored": [
+        "P0302"
+      ],
+      "pending": [
+        "P0171"
+      ],
+      "permanent": []
+    },
+    "mode06": null,
+    "vehicle_context": null,
+    "capabilities": null,
+    "metrics": null
+  },
+  "missing_data": [],
+  "error_message": null
+}

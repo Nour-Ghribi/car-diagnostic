@@ -1,0 +1,67 @@
+{
+  "data": {
+    "signals": {
+      "rpm": {
+        "value": 835,
+        "unit": "RPM",
+        "observed_ts": "2026-03-26T15:10:01Z",
+        "source": "on_demand"
+      },
+      "engine_load": {
+        "value": 24,
+        "unit": "%",
+        "observed_ts": "2026-03-26T15:10:01Z",
+        "source": "on_demand"
+      },
+      "coolant_temp": {
+        "value": 92,
+        "unit": "C",
+        "observed_ts": "2026-03-26T15:10:00Z",
+        "source": "on_demand"
+      },
+      "throttle_pos": {
+        "value": 15,
+        "unit": "%",
+        "observed_ts": "2026-03-26T15:10:01Z",
+        "source": "on_demand"
+      },
+      "stft_b1": {
+        "value": 9.2,
+        "unit": "%",
+        "observed_ts": "2026-03-26T15:10:01Z",
+        "source": "on_demand"
+      },
+      "ltft_b1": {
+        "value": 4.1,
+        "unit": "%",
+        "observed_ts": "2026-03-26T15:10:01Z",
+        "source": "on_demand"
+      },
+      "o2_b1s1": {
+        "value": 0.1,
+        "unit": "V",
+        "observed_ts": "2026-03-26T15:10:01Z",
+        "source": "on_demand"
+      },
+      "vehicle_speed": {
+        "value": 0,
+        "unit": "km/h",
+        "observed_ts": "2026-03-26T15:10:01Z",
+        "source": "on_demand"
+      },
+      "module_voltage": {
+        "value": 13.9,
+        "unit": "V",
+        "observed_ts": "2026-03-26T15:10:01Z",
+        "source": "on_demand"
+      }
+    },
+    "dtc": null,
+    "mode06": null,
+    "vehicle_context": null,
+    "capabilities": null,
+    "metrics": null
+  },
+  "missing_data": [],
+  "error_message": null
+}

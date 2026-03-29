@@ -1,0 +1,18 @@
+{
+  "status": "partial",
+  "data": {
+    "signals": {},
+    "dtc": null,
+    "mode06": null,
+    "vehicle_context": null,
+    "capabilities": null,
+    "metrics": null
+  },
+  "missing_data": [
+    {
+      "key": "mode06",
+      "reason": "no_data"
+    }
+  ],
+  "error_message": null
+}

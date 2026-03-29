@@ -1,0 +1,7 @@
+Parse the following user prompt into strict JSON only.
+Choose the closest supported intent for the V2 automotive diagnostic scope.
+Use the full meaning of the sentence, not keyword matching.
+If the request is too broad or ambiguous, lower confidence and prefer UNKNOWN or needs_clarification=true.
+
+User prompt:
+{{user_prompt}}

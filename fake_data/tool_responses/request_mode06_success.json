@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "data": {
+    "signals": {},
+    "dtc": null,
+    "mode06": {
+      "supported": true,
+      "test_id": "0601",
+      "value": 0.42,
+      "min_limit": 0.0,
+      "max_limit": 1.0,
+      "observed_ts": "2026-03-26T15:10:01Z",
+      "source": "on_demand"
+    },
+    "vehicle_context": null,
+    "capabilities": null,
+    "metrics": null
+  },
+  "missing_data": [],
+  "error_message": null
+}
