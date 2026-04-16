@@ -1,7 +1,20 @@
 {
   "vehicles": {
     "veh_001": {
+      "scenario_family": "combustion_misfire",
       "description": "Misfire with lean tendency and Mode 06 support",
+      "diagnostic_theme": "combustion_balance",
+      "expected_findings": [
+        "stored misfire code",
+        "lean correction trend",
+        "mode06 support available"
+      ],
+      "profile_tags": [
+        "misfire",
+        "lean",
+        "mode06",
+        "cylinder_diagnostics"
+      ],
       "capabilities": {
         "supported_signals": [
           "rpm",
@@ -152,7 +165,19 @@
       }
     },
     "veh_002": {
+      "scenario_family": "healthy_baseline",
       "description": "Healthy warm engine with no active faults",
+      "diagnostic_theme": "broad_vehicle_health",
+      "expected_findings": [
+        "no stored dtc",
+        "normal warm coolant temperature",
+        "stable voltage and trims"
+      ],
+      "profile_tags": [
+        "healthy",
+        "baseline",
+        "broad_health"
+      ],
       "capabilities": {
         "supported_signals": [
           "rpm",
@@ -277,7 +302,19 @@
       "mode06": null
     },
     "veh_003": {
+      "scenario_family": "lean_fuel_control",
       "description": "Lean running condition without confirmed misfire DTC",
+      "diagnostic_theme": "fuel_control",
+      "expected_findings": [
+        "positive fuel trims",
+        "low upstream o2 voltage",
+        "pending lean dtc"
+      ],
+      "profile_tags": [
+        "lean",
+        "fuel_trim",
+        "air_fuel_balance"
+      ],
       "capabilities": {
         "supported_signals": [
           "rpm",
@@ -390,7 +427,19 @@
       "mode06": null
     },
     "veh_004": {
+      "scenario_family": "cooling_overheat",
       "description": "Overheating risk with elevated coolant temperature",
+      "diagnostic_theme": "cooling_system",
+      "expected_findings": [
+        "high coolant temperature",
+        "elevated engine load",
+        "driving-speed context"
+      ],
+      "profile_tags": [
+        "overheat",
+        "cooling",
+        "temperature"
+      ],
       "capabilities": {
         "supported_signals": [
           "rpm",
@@ -476,7 +525,19 @@
       "mode06": null
     },
     "veh_005": {
+      "scenario_family": "sparse_cache_refresh",
       "description": "Sparse cache requiring on-demand refresh",
+      "diagnostic_theme": "data_availability",
+      "expected_findings": [
+        "cached data incomplete",
+        "fresh signals fill the gap",
+        "mode06 available on demand"
+      ],
+      "profile_tags": [
+        "sparse_cache",
+        "on_demand_refresh",
+        "partial_cache"
+      ],
       "capabilities": {
         "supported_signals": [
           "rpm",
@@ -556,6 +617,270 @@
         "observed_ts": "2026-03-26T15:50:02Z",
         "source": "on_demand"
       }
+    },
+    "veh_006": {
+      "scenario_family": "electrical_low_voltage",
+      "description": "Electrical system weakness with low module voltage and charging concern",
+      "diagnostic_theme": "electrical_charging",
+      "expected_findings": [
+        "stored low-voltage dtc",
+        "module voltage below healthy charging range",
+        "engine otherwise stable"
+      ],
+      "profile_tags": [
+        "battery",
+        "voltage",
+        "electrical",
+        "charging"
+      ],
+      "capabilities": {
+        "supported_signals": [
+          "rpm",
+          "engine_load",
+          "coolant_temp",
+          "vehicle_speed",
+          "module_voltage"
+        ],
+        "mode06_supported": false
+      },
+      "vehicle_context": {
+        "vin": "VF1ELEC000000006",
+        "ecu_name": "ECU_MAIN",
+        "calibration_id": "CAL-ELEC-2026",
+        "observed_ts": "2026-03-26T16:00:00Z",
+        "source": "db"
+      },
+      "latest_signals": {
+        "rpm": {
+          "value": 770,
+          "unit": "RPM",
+          "observed_ts": "2026-03-26T15:59:58Z",
+          "source": "push_cache"
+        },
+        "engine_load": {
+          "value": 16,
+          "unit": "%",
+          "observed_ts": "2026-03-26T15:59:58Z",
+          "source": "push_cache"
+        },
+        "coolant_temp": {
+          "value": 86,
+          "unit": "C",
+          "observed_ts": "2026-03-26T15:59:55Z",
+          "source": "push_cache"
+        },
+        "vehicle_speed": {
+          "value": 0,
+          "unit": "km/h",
+          "observed_ts": "2026-03-26T15:59:58Z",
+          "source": "push_cache"
+        },
+        "module_voltage": {
+          "value": 11.8,
+          "unit": "V",
+          "observed_ts": "2026-03-26T15:59:58Z",
+          "source": "push_cache"
+        }
+      },
+      "fresh_signals": {
+        "rpm": {
+          "value": 780,
+          "unit": "RPM",
+          "observed_ts": "2026-03-26T16:00:01Z",
+          "source": "on_demand"
+        },
+        "engine_load": {
+          "value": 18,
+          "unit": "%",
+          "observed_ts": "2026-03-26T16:00:01Z",
+          "source": "on_demand"
+        },
+        "coolant_temp": {
+          "value": 87,
+          "unit": "C",
+          "observed_ts": "2026-03-26T16:00:00Z",
+          "source": "on_demand"
+        },
+        "vehicle_speed": {
+          "value": 0,
+          "unit": "km/h",
+          "observed_ts": "2026-03-26T16:00:01Z",
+          "source": "on_demand"
+        },
+        "module_voltage": {
+          "value": 11.7,
+          "unit": "V",
+          "observed_ts": "2026-03-26T16:00:01Z",
+          "source": "on_demand"
+        }
+      },
+      "dtc": {
+        "stored": [
+          "P0562"
+        ],
+        "pending": [],
+        "permanent": []
+      },
+      "mode06_response": "no_data",
+      "mode06": null
+    },
+    "veh_007": {
+      "scenario_family": "rich_running",
+      "description": "Rich-running condition with negative fuel trims and confirmed mixture fault",
+      "diagnostic_theme": "fuel_control",
+      "expected_findings": [
+        "stored rich-mixture dtc",
+        "negative fuel trim correction",
+        "high upstream o2 voltage"
+      ],
+      "profile_tags": [
+        "rich",
+        "fuel_trim",
+        "mixture",
+        "drivability"
+      ],
+      "capabilities": {
+        "supported_signals": [
+          "rpm",
+          "engine_load",
+          "coolant_temp",
+          "throttle_pos",
+          "stft_b1",
+          "ltft_b1",
+          "o2_b1s1",
+          "vehicle_speed",
+          "module_voltage"
+        ],
+        "mode06_supported": false
+      },
+      "vehicle_context": {
+        "vin": "VF1RICH000000007",
+        "ecu_name": "ECU_MAIN",
+        "calibration_id": "CAL-RICH-2026",
+        "observed_ts": "2026-03-26T16:10:00Z",
+        "source": "db"
+      },
+      "latest_signals": {
+        "rpm": {
+          "value": 840,
+          "unit": "RPM",
+          "observed_ts": "2026-03-26T16:09:58Z",
+          "source": "push_cache"
+        },
+        "engine_load": {
+          "value": 26,
+          "unit": "%",
+          "observed_ts": "2026-03-26T16:09:58Z",
+          "source": "push_cache"
+        },
+        "coolant_temp": {
+          "value": 92,
+          "unit": "C",
+          "observed_ts": "2026-03-26T16:09:55Z",
+          "source": "push_cache"
+        },
+        "throttle_pos": {
+          "value": 15,
+          "unit": "%",
+          "observed_ts": "2026-03-26T16:09:57Z",
+          "source": "push_cache"
+        },
+        "stft_b1": {
+          "value": -17.5,
+          "unit": "%",
+          "observed_ts": "2026-03-26T16:09:58Z",
+          "source": "push_cache"
+        },
+        "ltft_b1": {
+          "value": -10.8,
+          "unit": "%",
+          "observed_ts": "2026-03-26T16:09:40Z",
+          "source": "push_cache"
+        },
+        "o2_b1s1": {
+          "value": 0.89,
+          "unit": "V",
+          "observed_ts": "2026-03-26T16:09:58Z",
+          "source": "push_cache"
+        },
+        "vehicle_speed": {
+          "value": 0,
+          "unit": "km/h",
+          "observed_ts": "2026-03-26T16:09:58Z",
+          "source": "push_cache"
+        },
+        "module_voltage": {
+          "value": 13.7,
+          "unit": "V",
+          "observed_ts": "2026-03-26T16:09:58Z",
+          "source": "push_cache"
+        }
+      },
+      "fresh_signals": {
+        "rpm": {
+          "value": 850,
+          "unit": "RPM",
+          "observed_ts": "2026-03-26T16:10:01Z",
+          "source": "on_demand"
+        },
+        "engine_load": {
+          "value": 27,
+          "unit": "%",
+          "observed_ts": "2026-03-26T16:10:01Z",
+          "source": "on_demand"
+        },
+        "coolant_temp": {
+          "value": 93,
+          "unit": "C",
+          "observed_ts": "2026-03-26T16:10:00Z",
+          "source": "on_demand"
+        },
+        "throttle_pos": {
+          "value": 16,
+          "unit": "%",
+          "observed_ts": "2026-03-26T16:10:01Z",
+          "source": "on_demand"
+        },
+        "stft_b1": {
+          "value": -18.2,
+          "unit": "%",
+          "observed_ts": "2026-03-26T16:10:01Z",
+          "source": "on_demand"
+        },
+        "ltft_b1": {
+          "value": -11.1,
+          "unit": "%",
+          "observed_ts": "2026-03-26T16:10:01Z",
+          "source": "on_demand"
+        },
+        "o2_b1s1": {
+          "value": 0.91,
+          "unit": "V",
+          "observed_ts": "2026-03-26T16:10:01Z",
+          "source": "on_demand"
+        },
+        "vehicle_speed": {
+          "value": 0,
+          "unit": "km/h",
+          "observed_ts": "2026-03-26T16:10:01Z",
+          "source": "on_demand"
+        },
+        "module_voltage": {
+          "value": 13.8,
+          "unit": "V",
+          "observed_ts": "2026-03-26T16:10:01Z",
+          "source": "on_demand"
+        }
+      },
+      "dtc": {
+        "stored": [
+          "P0172"
+        ],
+        "pending": [],
+        "permanent": []
+      },
+      "mode06_response": "no_data",
+      "mode06": null
     }
   }
 }

@@ -26,6 +26,7 @@ class AgentSettings:
     llm_fallback_threshold: float = 0.46
     unknown_threshold: float = 0.22
     enable_llm_fallback: bool = True
+    max_plan_steps: int = 5
 
 
 def get_settings() -> AgentSettings:
@@ -58,6 +59,7 @@ def _load_settings() -> AgentSettings:
         llm_fallback_threshold=_read_float("INTENT_LLM_FALLBACK_THRESHOLD", default=0.46),
         unknown_threshold=_read_float("INTENT_UNKNOWN_THRESHOLD", default=0.22),
         enable_llm_fallback=_read_bool("INTENT_ENABLE_LLM_FALLBACK", default=True),
+        max_plan_steps=_read_int("AGENT_MAX_PLAN_STEPS", default=5, minimum=1),
     )
 
 

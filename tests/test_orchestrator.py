@@ -6,6 +6,7 @@ import pytest
 
 from agent import orchestrator
 from backend.schemas import AgentRequest
+from tools import registry as tool_registry
 
 
 def _build_request(prompt: str, request_id: str = "req_test") -> AgentRequest:
@@ -108,8 +109,8 @@ def test_diagnose_uses_request_fresh_signals_when_cache_missing(monkeypatch: pyt
             "error_message": None,
         }
 
-    monkeypatch.setattr(orchestrator, "get_latest_signals", fake_get_latest_signals)
-    monkeypatch.setattr(orchestrator, "request_fresh_signals", fake_request_fresh_signals)
+    monkeypatch.setattr(tool_registry.legacy_tools, "get_latest_signals", fake_get_latest_signals)
+    monkeypatch.setattr(tool_registry.legacy_tools, "request_fresh_signals", fake_request_fresh_signals)
 
     response = orchestrator.diagnose(_build_request("show rpm", "req_refresh"))
     assert called["fresh"] is True
@@ -134,7 +135,7 @@ def test_diagnose_continues_when_mode06_returns_partial(monkeypatch: pytest.Monk
             "error_message": None,
         }
 
-    monkeypatch.setattr(orchestrator, "request_mode06", fake_request_mode06)
+    monkeypatch.setattr(tool_registry.legacy_tools, "request_mode06", fake_request_mode06)
     response = orchestrator.diagnose(_build_request("check cylinder 2", "req_mode06"))
     assert response.intent.name == "CHECK_CYLINDER"
     assert response.diagnosis
@@ -159,17 +160,16 @@ def test_diagnose_does_not_crash_when_tool_fails(monkeypatch: pytest.MonkeyPatch
             "error_message": "forced failure",
         }
 
-    monkeypatch.setattr(orchestrator, "get_dtcs", failing_get_dtcs)
+    monkeypatch.setattr(tool_registry.legacy_tools, "get_dtcs", failing_get_dtcs)
     response = orchestrator.diagnose(_build_request("read dtc", "req_err"))
     assert response.request_id == "req_err"
     assert response.diagnosis
     assert isinstance(response.missing_data, list)
 
 
-def test_diagnose_falls_back_when_parse_intent_v3_fails(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(orchestrator, "parse_intent_v3", lambda prompt: (_ for _ in ()).throw(RuntimeError("parse fail")))
-    response = orchestrator.diagnose(_build_request("read dtc", "req_parse_fallback"))
-    assert response.intent.name == "READ_DTC"
+def test_diagnose_returns_safe_clarification_when_pipeline_cannot_ground_request() -> None:
+    response = orchestrator.diagnose(_build_request("it feels unclear and weird", "req_parse_fallback"))
+    assert response.intent.parameters.resolution_policy in {"CLARIFICATION_NEEDED", "UNKNOWN"}
 
 
 def test_diagnose_broad_vehicle_health_builds_default_plan() -> None:

@@ -65,6 +65,22 @@ def test_request_mode06_handles_success_and_no_data() -> None:
     assert nodata_response["missing_data"][0]["reason"] == "no_data"
 
 
+def test_get_latest_signals_supports_low_voltage_scenario() -> None:
+    response = tools.get_latest_signals("veh_006", ["module_voltage", "rpm"])
+    _assert_tool_response_shape(response)
+    assert response["status"] == "success"
+    assert response["data"]["signals"]["module_voltage"]["value"] < 12.0
+
+
+def test_request_fresh_signals_supports_rich_running_scenario() -> None:
+    response = tools.request_fresh_signals("veh_007", ["stft_b1", "ltft_b1", "o2_b1s1"])
+    _assert_tool_response_shape(response)
+    assert response["status"] == "success"
+    assert response["data"]["signals"]["stft_b1"]["value"] < 0
+    assert response["data"]["signals"]["ltft_b1"]["value"] < 0
+    assert response["data"]["signals"]["o2_b1s1"]["value"] > 0.8
+
+
 def test_score_confidence_returns_score_between_zero_and_one() -> None:
     response = tools.score_confidence(present_count=4, missing_data=[], coherent=True)
     _assert_tool_response_shape(response)

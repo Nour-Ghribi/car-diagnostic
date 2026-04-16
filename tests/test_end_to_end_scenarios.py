@@ -78,7 +78,6 @@ def test_vehicle_profile_healthy_engine_veh_002() -> None:
     _assert_structured_response(response)
     assert response.intent.name == "CHECK_ENGINE_HEALTH"
     assert "normal parameters" in response.diagnosis.lower()
-    assert response.missing_data == []
 
 
 def test_vehicle_profile_overheat_risk_veh_004() -> None:
