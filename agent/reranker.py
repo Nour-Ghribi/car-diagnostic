@@ -79,8 +79,8 @@ def build_reranker_messages(
             "intent": candidate.intent_name,
             "scope": candidate.card.default_scope,
             "description": candidate.card.description,
-            "examples_fr": list(candidate.card.examples_fr[:4]),
-            "examples_en": list(candidate.card.examples_en[:4]),
+            "expected_parameters": list(candidate.card.expected_parameters),
+            "default_parameters": dict(candidate.card.default_parameters),
             "retrieval_similarity": candidate.similarity_score,
             "clarification_question": candidate.card.clarification_question,
         }
@@ -391,10 +391,14 @@ def _candidate_terms(candidate: RetrievedIntentCandidate) -> tuple[str, ...]:
     card = candidate.card
     joined = " ".join(
         (
+            card.goal_name,
+            card.intent_name,
             card.description,
-            " ".join(card.examples_fr),
-            " ".join(card.examples_en),
-            " ".join(card.semantic_hints),
+            " ".join(card.expected_parameters),
+            " ".join(f"{key} {value}" for key, value in card.default_parameters.items()),
+            card.clarification_question or "",
+            card.goal_name.replace("_", " "),
+            card.intent_name.replace("_", " "),
         )
     ).lower()
     return tuple(token for token in re.split(r"[^a-z0-9_]+", joined) if token)

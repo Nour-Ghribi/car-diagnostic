@@ -5,6 +5,8 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any, Literal
 
+from data.mock_runtime_scenarios import get_mock_runtime_scenario
+
 
 SignalName = Literal[
     "rpm",
@@ -52,15 +54,8 @@ def _load_mock(filename: str) -> dict[str, Any]:
     with (MOCK_DIR / filename).open("r", encoding="utf-8") as fh:
         return json.load(fh)
 
-
-def _load_vehicle_profiles() -> dict[str, Any]:
-    return _load_mock("vehicle_profiles.json")
-
-
 def _get_vehicle_profile(vehicle_id: str) -> dict[str, Any]:
-    profiles = _load_vehicle_profiles()
-    vehicles = profiles.get("vehicles", {})
-    return deepcopy(vehicles.get(vehicle_id) or vehicles.get("veh_001", {}))
+    return get_mock_runtime_scenario(vehicle_id).to_runtime_payload()
 
 
 def _empty_data() -> dict[str, Any]:
