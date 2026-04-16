@@ -1,0 +1,5 @@
+pydantic>=2,<3
+pytest>=8,<10
+openai>=1,<2
+google-genai>=1,<2
+sentence-transformers>=3,<4
